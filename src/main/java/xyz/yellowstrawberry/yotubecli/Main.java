@@ -146,9 +146,10 @@ public class Main {
                 int r;
                 byte[] bf = new byte[1024];
                 while ((r=ipt.read(bf)) != -1) {
-                    os.write(bf);
+                    os.write(bf, 0, r);
                     progressBar.stepBy(r);
                 }
+                os.flush();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }finally {

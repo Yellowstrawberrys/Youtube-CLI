@@ -4,7 +4,7 @@ plugins {
 }
 //native-image -jar youtube-cli.jar --no-fallback --enable-url-protocols=https
 group = 'xyz.yellowstrawberry'
-version = '1.0.1'
+version = '1.0.2'
 
 repositories {
     mavenCentral()
