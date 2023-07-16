@@ -75,8 +75,8 @@ public class Main {
                         @Override
                         public void onFinished(File f) {
                             pb1.close();
-                            System.out.printf(ConsoleColors.GREEN+"Successfully downloaded `%s`%n!"+ConsoleColors.RESET, title);
-                            System.out.printf(ConsoleColors.YELLOW+"File saved at '%s'!%n"+ConsoleColors.YELLOW, f.getAbsolutePath());
+                            System.out.printf(ConsoleColors.GREEN+"Successfully downloaded `%s`!%n"+ConsoleColors.RESET, title);
+                            System.out.printf(ConsoleColors.YELLOW+"File saved at '%s'!%n"+ConsoleColors.RESET, f.getAbsolutePath());
                         }
 
                         @Override
