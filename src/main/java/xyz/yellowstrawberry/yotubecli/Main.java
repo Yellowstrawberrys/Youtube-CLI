@@ -115,7 +115,7 @@ public class Main {
     }
 
     private static final String verUrl = "https://raw.githubusercontent.com/Yellowstrawberrys/Youtube-CLI/main/version.json";
-    private static final String upUrl = "https://github.com/Yellowstrawberrys/Youtube-CLI/releases/latest/download/youtube-cli.exe";
+    private static final String upUrl = "https://github.com/Yellowstrawberrys/Youtube-CLI/releases/latest/download/";
 
     private static void versionCheck() {
         if(!getLatestVersion().equals("nointernet") && !getLatestVersion().equals(v)) {
@@ -135,7 +135,7 @@ public class Main {
             boolean isw = System.getProperty("os.name").toLowerCase().startsWith("windows");
             URLConnection con = null;
             try {
-                con = new URL(upUrl).openConnection();
+                con = new URL(upUrl+(isw?"youtube-cli.exe":"youtube-cli")).openConnection();
             } catch (IOException e) {
                 System.out.println(ConsoleColors.RED+"ERROR: "+e.getLocalizedMessage()+ConsoleColors.RESET);
             }
