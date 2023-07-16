@@ -10,5 +10,5 @@
 This program allows you to download videos from youtube for educational purposes only.
 
 ### Used Libraries
-https://github.com/sealedtx/java-youtube-downloader
+https://github.com/sealedtx/java-youtube-downloader <br/>
 https://github.com/ctongfei/progressbar
