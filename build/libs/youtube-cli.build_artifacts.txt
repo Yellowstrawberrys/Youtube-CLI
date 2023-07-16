@@ -1,0 +1,13 @@
+[EXECUTABLE]
+youtube-cli.exe
+
+[JDK_LIB]
+awt.dll
+
+[JDK_LIB_SHIM]
+# Note that shim JDK libraries depend on this
+# particular native image (including its name)
+# and therefore cannot be used with others.
+java.dll
+jvm.dll
+
