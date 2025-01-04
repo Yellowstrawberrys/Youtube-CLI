@@ -1,4 +1,4 @@
-package xyz.yellowstrawberry.yotubecli;
+package net.yellowstrawberry.youtubecli;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +23,7 @@ public class JsonReader {
      * **/
     public static JSONObject readFromUrl(String url) throws IOException, JSONException {
         URLConnection con = new URL(url).openConnection();
-        con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+        con.setRequestProperty("User-Agent", RandomUserAgent.getRandomUserAgent());
         InputStream is = con.getInputStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));

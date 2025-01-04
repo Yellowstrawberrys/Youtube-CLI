@@ -1,4 +1,4 @@
-package xyz.yellowstrawberry.yotubecli;
+package net.yellowstrawberry.youtubecli;
 public class ConsoleColors {
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
