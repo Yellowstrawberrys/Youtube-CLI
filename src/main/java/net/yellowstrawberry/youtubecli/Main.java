@@ -3,6 +3,7 @@ package net.yellowstrawberry.youtubecli;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import com.github.kiulian.downloader.YoutubeDownloader;
@@ -20,6 +21,7 @@ public class Main {
     static String v = "2.0.0";
     public static void main(String[] args) {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println(ConsoleColors.RESET)));
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out), true, StandardCharsets.UTF_8));
 
         if(args.length < 1) {
             versionCheck();
@@ -48,7 +50,7 @@ public class Main {
         }
         a.remove(idx);
 
-        if(idx+1 < args.length){
+        if(idx+1 > args.length){
             System.err.println("ERR: Type is not specified");
             System.exit(1);
         }
@@ -81,11 +83,13 @@ public class Main {
 
                             @Override
                             public void onFinished(File f) {
+                                pb1.close();
                                 System.out.printf(ConsoleColors.GREEN + "Successfully downloaded file as `%s`!%n" + ConsoleColors.RESET, f.getAbsolutePath());
                             }
 
                             @Override
                             public void onError(Throwable throwable) {
+                                pb1.close();
                                 System.err.println("ERR: " + throwable.getLocalizedMessage());
                             }
                         })
@@ -96,7 +100,7 @@ public class Main {
 
             return null;
         }
-        ).or(() -> {
+        ).orElseGet(() -> {
            System.err.println("ERR: URL is not specified");
             System.exit(1);
            return java.util.Optional.empty();
@@ -178,7 +182,7 @@ public class Main {
             }
             con.setRequestProperty("User-Agent", RandomUserAgent.getRandomUserAgent());
             try(BufferedInputStream ipt = new BufferedInputStream(con.getInputStream()); ProgressBar progressBar = new ProgressBar("Updating", ipt.available()); FileOutputStream os = new FileOutputStream("youtube-cli%s.part".formatted(isw?".exe":""), false)) {
-                progressBar.setExtraMessage("youtube-cli%s.part".formatted(isw?".exe":""));
+                progressBar.setExtraMessage("youtubecli%s.part".formatted(isw?".exe":""));
 
                 int r;
                 byte[] bf = new byte[1024];
@@ -195,9 +199,9 @@ public class Main {
                     f = f.replaceAll("\\\\", "/");
                     if(f.charAt(f.length()-1)=='.') f = f.substring(0, f.length()-2);
                     if(isw) {
-                        new ProcessBuilder("cmd", "/c", "cd %s && ping 127.0.0.1 -n 1 -w 500> nul && del /F /Q youtube-cli.exe && rename youtube-cli.exe.part youtube-cli.exe".formatted(f)).inheritIO().start();
+                        new ProcessBuilder("cmd", "/c", "cd %s && ping 127.0.0.1 -n 1 -w 500> nul && del /F /Q youtubecli.exe && rename youtubecli.exe.part youtubecli.exe".formatted(f)).inheritIO().start();
                     }else {
-                        new ProcessBuilder("/bin/bash", "-c", "cd %s && sleep .5 && rm -f youtube-cli && mv youtube-cli.part youtube-cli".formatted(f)).inheritIO().start();
+                        new ProcessBuilder("/bin/bash", "-c", "cd %s && sleep .5 && rm -f youtube-cli && mv youtubecli.part youtubecli".formatted(f)).inheritIO().start();
                     }
                     System.out.println(ConsoleColors.GREEN+"Now, you're up-to-date!"+ConsoleColors.RESET);
                     System.exit(0);
